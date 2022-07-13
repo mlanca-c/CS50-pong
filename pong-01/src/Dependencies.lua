@@ -15,6 +15,8 @@ push = require 'lib/push'
 -- source: https://github.com/vrld/hump/blob/master/class.lua
 Class = require 'lib/class'
 
+require 'src/Paddle'
+
 -- contains most of the constant and global variables of the program
 require 'src/constants'
 

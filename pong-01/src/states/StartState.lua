@@ -4,7 +4,9 @@
 --
 -- User: mlanca-c
 -- URL: http://github.com/mlanca-c/CS50-pong
--- Description: starting screen of the game, shown on startup.
+-- Description: The StartState class is the beginning state of the game. It
+-- 				makes the player choose between "Play", "HighScore", and
+-- 				"Exit Game".
 --------------------------------------------------------------------------------
 
 StartState = Class{ __includes = BaseState }
@@ -19,13 +21,19 @@ end
 function StartState:update( dt )
 
 	-- handling up and down keys for menu selection
-	if love.keyboard.wasPressed( 'up' ) then
+	if love.keyboard.wasPressed( 'up' )
+		or love.keyboard.wasPressed( 'w' ) then
+
 		self.highlight = ( self.highlight - 1 ) % 2
 		gSounds[ 'paddle_hit' ]:play()
+
 	end
-	if love.keyboard.wasPressed( 'down' ) then
+	if love.keyboard.wasPressed( 'down' )
+		or love.keyboard.wasPressed( 's' ) then
+
 		self.highlight = ( self.highlight + 1 ) % 2
 		gSounds[ 'paddle_hit' ]:play()
+
 	end
 
 	-- handling enter press for menu selection
@@ -43,10 +51,10 @@ function StartState:update( dt )
 		end
 	end
 
-	-- quit game if escape is pressed
-	if love.keyboard.wasPressed( 'escape' ) then
-		love.event.quit()
-	end
+	-- -- quit game if escape is pressed
+	-- if love.keyboard.wasPressed( 'escape' ) then
+	-- 	love.event.quit()
+	-- end
 
 end
 
@@ -67,7 +75,7 @@ function StartState:render()
 
 	-- highligh 1
 	if self.highlight == 0 then
-		love.graphics.setColor( 0 / 255, 255 / 255, 0 / 255 )
+		love.graphics.setColor( 121 / 255, 121 / 255, 121 / 255 )
 	end
 	love.graphics.printf(
 		"PLAY",
@@ -83,7 +91,7 @@ function StartState:render()
 
 	-- highligh 2
 	if self.highlight == 1 then
-		love.graphics.setColor( 0 / 255, 255 / 255, 0 / 255 )
+		love.graphics.setColor( 121 / 255, 121 / 255, 121 / 255 )
 	end
 	love.graphics.printf(
 		"EXIT GAME",

@@ -77,6 +77,9 @@ function love.draw()
 	push:start()
 	-- drawing starts here
 
+	-- Setting background to a dark grey color
+	love.graphics.clear( 40 / 255, 45 / 255, 52 / 255, 255 / 255 )
+
 	gStateMachine:render()
 
 	displayFPS()
