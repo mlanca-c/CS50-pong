@@ -1,4 +1,4 @@
-## pong-00 "The Day-0 Update"
+## pong-01 "The Paddle Update"
 
  <small description of project>
 
@@ -8,18 +8,18 @@
 
 # Documentation
 
- * pong-00 displays the main screen and allows the user to toggle between the “Start” and “Exit Game” options.
+ * pong-01 creates a Paddle and adds interactivity to the Paddles by letting us move them up and down using the `w` and `s` keys for the left Paddle and the up and down keys for the right Paddle.
 
 # Cloning
 
  ```
  git clone git@github.com:mlanca-c/CS50-pong.git
  cd CS50-pong
- git checkout pong-00
+ git checkout pong-01
  ```
  
 # Compiling
  
  ```
- love pong-00
+ love pong-01
  ```

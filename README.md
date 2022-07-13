@@ -11,6 +11,9 @@
 ### pong-00 "The Day-0 Update"
  * pong-00 displays the main screen and allows the user to toggle between the “Start” and “Exit Game” options.
 
+### pong-01 "The Paddle Update"
+ * pong-01 creates a Paddle and adds interactivity to the Paddles by letting us move them up and down using the `w` and `s` keys for the left Paddle and the up and down keys for the right Paddle.
+
 # Cloning
 
  ```
