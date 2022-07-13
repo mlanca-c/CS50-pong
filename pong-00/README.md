@@ -8,6 +8,7 @@
 
 # Documentation
 
+ * pong-00 displays the main screen and allows the user to toggle between the “Start” and “Exit Game” options.
 
 # Cloning
 

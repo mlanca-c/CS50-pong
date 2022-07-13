@@ -9,7 +9,7 @@
 # Documentation
 
 ### pong-00 "The Day-0 Update"
- * pong-00
+ * pong-00 displays the main screen and allows the user to toggle between the “Start” and “Exit Game” options.
 
 # Cloning
 
