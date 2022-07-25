@@ -1,76 +1,78 @@
--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 --
 -- main.lua
 --
 -- User: mlanca-c
 -- URL: http://github.com/mlanca-c/CS50-pong
 -- Version: 1.0
--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 
 -- Base Functions --
 
--- love.load() used for initializing game state at the very beginning of the
---             program execution - Whatever code we put here will be executed
---             at the very beginning of the program.
+-- love.graphics.setDefaultFilter(min, mag) sets the texture scaling filter when
+--                                          minimizing and magnifying textures
+--                                          and fonts. LÖVE’s default is
+--                                          bilinear, which causes bluriness,
+--                                          but for our use cases we will
+--                                          typically want nearest-neighnour
+--                                          filtering (nearest), whcih results
+--                                          in perfect pixel upscaling and
+--                                          downscaling, simulating a retro feel
 
--- love.update(dt) this function is called by LÖVE at each frame of program
---                 execution. dt (DeltaTime) will be the elapsed time in
---                 seconds since the last frame, and we can use this to scale
---                 any changes in our game for even behaviour across frames.
+-- love.keypressed(key) this is LÖVE2D callback function that executes whenever
+--                      we press a key, assuming we've implemented this is
+--                      `main.lua`, in the same vein as love.load(),
+--                      love.update(dt), and love.draw(). It'll allow us to
+--                      receive input from the keyboard for our game.
 
--- love.draw() This function is also called at each frame by LÖVE. It is called
---             after the update step completes so that we can draw things to the
---             screen once they've changed.
-
--- LÖVE2D expects all these functions to be implemented in main.lua and calls
--- them internally
-
-
--- love.graphics.printf(text, x, y, [width], [align]) versatile print function
---                                                    that can align text left,
---                                                    right or center of the
---                                                    screen.
-
--- love.window.setMode(width, height, params) Used to initialize the window's
---                                            dimensions and to set parameters
---                                            like vsync (vertical sync),
---                                            whether we're fullscreen or not,
---                                            and whether the window is
---                                            resizable after startup. We won't
---                                            be using this functions past this
---                                            example in favor of the `push`
---                                            virtual resolution library, which
---                                            has its own method like this, but
---                                            it is useful to know if
---                                            encountered in other code.
+-- love.event.quit() single function that termia=nates the application
 
 -- Code --
 
--- initialize our game by specifying in the love.load() function that our
--- 1280x720 window shouldn't be fullscreen or resizable, but it should be
--- synced to our monitor's own refresh rate.
+-- We've begun using the `push` library. You can import other files in your
+-- main.lua file with the `require` keyword given that they are in the same
+-- directory
 
-WINDOW_WIDTH = 1280
+push = require 'push'
+
+WINDOW_WIDTH = 1820
 WINDOW_HEIGHT = 720
 
+VIRTUAL_WIDTH = 432
+VIRTUAL_HEIGHT = 243
+
+-- using the push library to treat our game as if it were on a 432x243 window,
+-- while actually rendering it at our desired 1280x720 window.
 function love.load()
-	love.window.setMode(WINDOW_WIDTH, WINDOW_HEIGHT, {
+
+	love.graphics.setDefaultFilter('nearest', 'nearest')
+
+	push:setupScreen(VIRTUAL_WIDTH, VIRTUAL_HEIGHT, WINDOW_WIDTH, WINDOW_HEIGHT, {
 		fullscreen = false,
 		resizable = false,
 		vsync = true
 	})
+
 end
 
--- overwrite the love.draw() function so that we can specify the text we'd like to
--- render to the screen, in this case "Hello Pong!", along with the coordinates
--- where it shold be drawn.
+-- quit the game via user input
+
+function love.keypressed(key)
+	if key == 'escape' then
+		love.event.quit()
+	end
+end
+
+-- small tweak to our love.draw() function so as to integrate the push library into the code.
 
 function love.draw()
+	push:apply('start')
 	love.graphics.printf(
 		'Hello Pong!',
 		0,
-		WINDOW_HEIGHT / 2,
-		WINDOW_WIDTH,
+		VIRTUAL_HEIGHT / 2,
+		VIRTUAL_WIDTH,
 		'center'
 	)
+	push:apply('end')
 end
