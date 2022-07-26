@@ -39,7 +39,7 @@ BALL_WIDTH = 4
 BALL_HEIGHT = 4
 
 -- maximum player score
-MAX_SCORE = 2
+MAX_SCORE = 10
 
 -- love.load() it's used to initialize game state at the very beginning.
 function love.load()
